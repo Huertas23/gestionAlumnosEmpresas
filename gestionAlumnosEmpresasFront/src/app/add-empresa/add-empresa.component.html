@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h2>Agregar Empresa</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="razon_social">Razón Social:</label>
+    <input type="text" id="razon_social" name="razon_social" [(ngModel)]="empresa.razon_social" required>
+
+    <label for="domicilio_social">Domicilio Social:</label>
+    <input type="text" id="domicilio_social" name="domicilio_social" [(ngModel)]="empresa.domicilio_social">
+
+    <label for="cif">CIF:</label>
+    <input type="text" id="cif" name="cif" [(ngModel)]="empresa.cif">
+
+    <label for="fecha_firma">Fecha de Firma:</label>
+    <input type="date" id="fecha_firma" name="fecha_firma" [(ngModel)]="empresa.fecha_firma">
+
+    <label for="direccion_practicas">Dirección de Prácticas:</label>
+    <input type="text" id="direccion_practicas" name="direccion_practicas" [(ngModel)]="empresa.direccion_practicas">
+
+    <label for="tutor_laboral">Tutor Laboral:</label>
+    <input type="text" id="tutor_laboral" name="tutor_laboral" [(ngModel)]="empresa.tutor_laboral">
+
+    <label for="dni_tutor_laboral">DNI Tutor Laboral:</label>
+    <input type="text" id="dni_tutor_laboral" name="dni_tutor_laboral" [(ngModel)]="empresa.dni_tutor_laboral">
+
+    <label for="representante_legal">Representante Legal:</label>
+    <input type="text" id="representante_legal" name="representante_legal" [(ngModel)]="empresa.representante_legal">
+
+    <label for="dni_representante">DNI Representante:</label>
+    <input type="text" id="dni_representante" name="dni_representante" [(ngModel)]="empresa.dni_representante">
+
+    <button type="submit">Agregar Empresa</button>
+  </form>
+</div>

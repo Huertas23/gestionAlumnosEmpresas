@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bd2e2e;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.home-button {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.home-button:hover {
+  text-decoration: underline;
+}
+
+.logout-container {
+  display: flex;
+  align-items: center;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #bd2e2e;
+  padding: 10px 0;
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item,
+.submenu-item {
+  color: white;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+.menu-item:hover,
+.submenu-item:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #bd2e2e;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}

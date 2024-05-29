@@ -1,0 +1,22 @@
+<div class="home-container">
+  <h2>Bienvenido al Sistema de Gestión de Prácticas</h2>
+  <div class="table-container">
+    <h3>Alumnos y Empresas Asignadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre del Alumno</th>
+          <th>Empresa Asignada</th>
+          <th>Tutor Empresarial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnos">
+          <td>{{ alumno.nombre }} {{ alumno.apellido }}</td>
+          <td>{{ getEmpresaNombre(alumno.empresa_id) }}</td>
+          <td>{{ getTutorLaboral(alumno.empresa_id) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

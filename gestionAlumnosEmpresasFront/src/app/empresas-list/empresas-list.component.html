@@ -1,0 +1,27 @@
+<div class="table-container">
+  <h2>Lista de Empresas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Razón Social</th>
+        <th>Domicilio Social</th>
+        <th>CIF</th>
+        <th>Fecha de Firma</th>
+        <th>Dirección de Prácticas</th>
+        <th>Tutor Laboral</th>
+        <th>DNI Tutor Laboral</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empresa of empresas">
+        <td>{{ empresa.razon_social }}</td>
+        <td>{{ empresa.domicilio_social }}</td>
+        <td>{{ empresa.cif }}</td>
+        <td>{{ empresa.fecha_firma | date }}</td>
+        <td>{{ empresa.direccion_practicas }}</td>
+        <td>{{ empresa.tutor_laboral }}</td>
+        <td>{{ empresa.dni_tutor_laboral }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

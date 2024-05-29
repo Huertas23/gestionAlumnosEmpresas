@@ -1,0 +1,21 @@
+<div class="table-container">
+  <h2>Lista de Tutores</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>DNI Responsable</th>
+        <th>Curso</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tutor of tutores">
+        <td>{{ tutor.nombre }}</td>
+        <td>{{ tutor.dni_responsable }}</td>
+        <td>{{ tutor.curso }}</td>
+        <td>{{ tutor.tipo }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

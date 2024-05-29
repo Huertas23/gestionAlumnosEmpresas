@@ -1,0 +1,33 @@
+<div *ngIf="authService.isLoggedIn(); else loginTemplate">
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/img/logo.png" alt="Logo">
+      <a routerLink="/home" class="home-button">Home</a>
+    </div>
+    <h1>Gestión Alumnos y Empresas</h1>
+    <div class="logout-container">
+      <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+  </header>
+  <nav class="navbar">
+    <div class="menu-group">
+      <a routerLink="/alumnos" class="menu-item">Lista de Alumnos</a>
+      <a routerLink="/add-alumno" class="submenu-item">Agregar Alumno</a>
+    </div>
+    <div class="menu-group">
+      <a routerLink="/empresas" class="menu-item">Lista de Empresas</a>
+      <a routerLink="/add-empresa" class="submenu-item">Agregar Empresa</a>
+    </div>
+    <div class="menu-group">
+      <a routerLink="/tutores" class="menu-item">Lista de Tutores</a>
+      <a routerLink="/add-tutor" class="submenu-item">Agregar Tutor</a>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+  <footer class="footer">
+    <p>© 2024 - Tu Empresa. Todos los derechos reservados.</p>
+  </footer>
+</div>
+<ng-template #loginTemplate>
+  <app-login></app-login>
+</ng-template>

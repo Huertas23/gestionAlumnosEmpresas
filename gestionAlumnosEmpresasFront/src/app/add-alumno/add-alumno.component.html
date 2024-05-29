@@ -1,0 +1,28 @@
+<div class="form-container">
+  <h2>Agregar Alumno</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="alumno.nombre" required>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" [(ngModel)]="alumno.apellido" required>
+
+    <label for="dni">DNI:</label>
+    <input type="text" id="dni" name="dni" [(ngModel)]="alumno.dni">
+
+    <label for="centro_practicas">Centro de Prácticas:</label>
+    <input type="text" id="centro_practicas" name="centro_practicas" [(ngModel)]="alumno.centro_practicas">
+
+    <label for="empresa_id">Empresa:</label>
+    <select id="empresa_id" name="empresa_id" [(ngModel)]="alumno.empresa_id">
+      <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.razon_social }}</option>
+    </select>
+
+    <label for="tutor_centro_id">Tutor del Centro:</label>
+    <select id="tutor_centro_id" name="tutor_centro_id" [(ngModel)]="alumno.tutor_centro_id">
+      <option *ngFor="let tutor of tutoresCentro" [value]="tutor.id">{{ tutor.nombre }}</option>
+    </select>
+
+    <button type="submit">Agregar Alumno</button>
+  </form>
+</div>

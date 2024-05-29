@@ -1,0 +1,24 @@
+<div class="form-container">
+  <h2>Agregar Seguimiento</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="alumno">Alumno:</label>
+    <div>{{ alumno?.nombre }} {{ alumno?.apellido }}</div>
+
+    <label for="empresa">Empresa:</label>
+    <div>{{ empresa?.razon_social }}</div>
+
+    <label for="tutor">Tutor Laboral:</label>
+    <div>{{ empresa?.tutor_laboral }}</div>
+
+    <label for="fecha_seguimiento">Fecha de Seguimiento:</label>
+    <input type="date" id="fecha_seguimiento" [(ngModel)]="seguimiento.fecha_seguimiento" name="fecha_seguimiento" required>
+
+    <label for="informe_final">Informe Final:</label>
+    <textarea id="informe_final" [(ngModel)]="seguimiento.informe_final" name="informe_final" rows="4" required></textarea>
+
+    <label for="archivo_pdf">Adjuntar PDF:</label>
+    <input type="file" id="archivo_pdf" (change)="onFileChange($event)" accept="application/pdf">
+
+    <button type="submit">Agregar Seguimiento</button>
+  </form>
+</div>
