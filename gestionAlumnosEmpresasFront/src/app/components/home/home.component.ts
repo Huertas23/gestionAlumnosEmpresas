@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
       dni: '12345678A',
       centroPracticas: 'Tech Solutions',
       empresa_id: 1,
-      tutor_centro_id: 1,
+      tutorCentroId: 1,
     },
     {
       id: 2,
@@ -25,34 +25,34 @@ export class HomeComponent implements OnInit {
       dni: '87654321B',
       centroPracticas: 'Innovative Startups',
       empresa_id: 2,
-      tutor_centro_id: 2,
+      tutorCentroId: 2,
     },
   ];
 
   empresas: Empresa[] = [
     {
       id: 1,
-      razon_social: 'Tech Solutions',
-      domicilio_social: 'Calle Falsa 123',
+      razonSocial: 'Tech Solutions',
+      domicilioSocial: 'Calle Falsa 123',
       cif: 'A12345678',
-      fecha_firma: new Date(),
-      direccion_practicas: 'Calle Practicas 123',
-      tutor_laboral: 'Carlos López',
-      dni_tutor_laboral: '12345678A',
-      representante_legal: 'Ana García',
-      dni_representante: '87654321B',
+      fechaFirma: new Date(),
+      direccionPracticas: 'Calle Practicas 123',
+      tutorLaboral: 'Carlos López',
+      dniTutorLaboral: '12345678A',
+      representanteLegal: 'Ana García',
+      dniRepresentante: '87654321B',
     },
     {
       id: 2,
-      razon_social: 'Innovative Startups',
-      domicilio_social: 'Avenida Siempre Viva 742',
+      razonSocial: 'Innovative Startups',
+      domicilioSocial: 'Avenida Siempre Viva 742',
       cif: 'B87654321',
-      fecha_firma: new Date(),
-      direccion_practicas: 'Avenida Practicas 742',
-      tutor_laboral: 'María Sánchez',
-      dni_tutor_laboral: '87654321B',
-      representante_legal: 'Luis Pérez',
-      dni_representante: '12345678A',
+      fechaFirma: new Date(),
+      direccionPracticas: 'Avenida Practicas 742',
+      tutorLaboral: 'María Sánchez',
+      dniTutorLaboral: '87654321B',
+      representanteLegal: 'Luis Pérez',
+      dniRepresentante: '12345678A',
     },
   ];
 
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
       return 'No asignada';
     }
     const empresa = this.empresas.find((e) => e.id === empresaId);
-    return empresa ? empresa.razon_social : 'No asignada';
+    return empresa ? empresa.razonSocial : 'No asignada';
   }
 
   getTutorLaboral(empresaId: number | undefined): string {
@@ -75,6 +75,6 @@ export class HomeComponent implements OnInit {
       return 'No asignado';
     }
     const empresa = this.empresas.find((e) => e.id === empresaId);
-    return empresa ? empresa.tutor_laboral : 'No asignado';
+    return empresa ? empresa.tutorLaboral : 'No asignado';
   }
 }

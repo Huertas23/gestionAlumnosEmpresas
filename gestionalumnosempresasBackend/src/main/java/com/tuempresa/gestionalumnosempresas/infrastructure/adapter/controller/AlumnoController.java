@@ -46,8 +46,8 @@ public class AlumnoController {
     }
     
     public Alumno mapperModel( Map<String, Object> alumnoMap ) {
-    	Long empresaId = Long.valueOf((String) alumnoMap.get("empresa_id"));
-    	  Long tutorCentroId = Long.valueOf((String) alumnoMap.get("tutor_centro_id"));
+    	Long empresaId = Long.valueOf((String) alumnoMap.get("empresaId"));
+    	  Long tutorCentroId = Long.valueOf((String) alumnoMap.get("tutorCentroId"));
 
     	  // Crear el objeto Alumno con los datos convertidos
     	  Alumno alumnoObj = new Alumno();

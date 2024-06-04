@@ -11,15 +11,15 @@ import { CONSTANTES } from 'src/app/config/Constants';
 })
 export class AddEmpresaComponent {
   empresa: Empresa = {
-    razon_social: '',
-    domicilio_social: '',
+    razonSocial: '',
+    domicilioSocial: '',
     cif: '',
-    fecha_firma: undefined,
-    direccion_practicas: '',
-    tutor_laboral: '',
-    dni_tutor_laboral: '',
-    representante_legal: '',
-    dni_representante: '',
+    fechaFirma: undefined,
+    direccionPracticas: '',
+    tutorLaboral: '',
+    dniTutorLaboral: '',
+    representanteLegal: '',
+    dniRepresentante: '',
   };
 
   constructor(private router: Router, private httpService: HttpService) {}

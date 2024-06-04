@@ -14,13 +14,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let empresa of empresas">
-        <td>{{ empresa.razon_social }}</td>
-        <td>{{ empresa.domicilio_social }}</td>
+        <td>{{ empresa.razonSocial }}</td>
+        <td>{{ empresa.domicilioSocial }}</td>
         <td>{{ empresa.cif }}</td>
-        <td>{{ empresa.fecha_firma | date }}</td>
-        <td>{{ empresa.direccion_practicas }}</td>
-        <td>{{ empresa.tutor_laboral }}</td>
-        <td>{{ empresa.dni_tutor_laboral }}</td>
+        <td>{{ empresa.fechaFirma | date }}</td>
+        <td>{{ empresa.direccionPracticas }}</td>
+        <td>{{ empresa.tutorLaboral }}</td>
+        <td>{{ empresa.dniTutorLaboral }}</td>
       </tr>
     </tbody>
   </table>

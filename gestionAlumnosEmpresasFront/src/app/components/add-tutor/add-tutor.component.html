@@ -7,14 +7,9 @@
     <label for="dni_responsable">DNI Responsable:</label>
     <input type="text" id="dni_responsable" name="dni_responsable" [(ngModel)]="tutor.dni_responsable" required>
 
-    <label for="tipo">Tipo de Tutor:</label>
-    <select id="tipo" name="tipo" [(ngModel)]="tutor.tipo">
-      <option value="centro">Centro</option>
-      <option value="empresa">Empresa</option>
-    </select>
 
-    <label *ngIf="tutor.tipo === 'centro'" for="curso">Curso:</label>
-    <input *ngIf="tutor.tipo === 'centro'" type="text" id="curso" name="curso" [(ngModel)]="tutor.curso">
+    <label for="curso">Curso:</label>
+    <input type="text" id="curso" name="curso" [(ngModel)]="tutor.curso">
 
     <button type="submit">Agregar Tutor</button>
   </form>

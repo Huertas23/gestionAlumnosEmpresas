@@ -15,12 +15,12 @@
 
     <label for="empresa_id">Empresa:</label>
     <select id="empresa_id" name="empresa_id" [(ngModel)]="alumno.empresa_id">
-      <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.razon_social }}</option>
+      <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.razonSocial }}</option>
     </select>
 
-    <label for="tutor_centro_id">Tutor del Centro:</label>
-    <select id="tutor_centro_id" name="tutor_centro_id" [(ngModel)]="alumno.tutor_centro_id">
-      <option *ngFor="let tutor of tutoresCentro" [value]="tutor.id">{{ tutor.nombre }}</option>
+    <label for="tutorCentroId">Tutor del Centro:</label>
+    <select id="tutorCentroId" name="tutorCentroId" [(ngModel)]="alumno.tutorCentroId">
+      <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.tutorLaboral }}</option>
     </select>
 
     <button type="submit">Agregar Alumno</button>

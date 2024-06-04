@@ -13,14 +13,12 @@ export class TutoresListComponent implements OnInit {
       curso: '1A',
       nombre: 'Carlos García',
       dni_responsable: '12345678A',
-      tipo: 'centro',
     },
     {
       id: 2,
       curso: '2B',
       nombre: 'María López',
       dni_responsable: '87654321B',
-      tipo: 'centro',
     },
   ];
 

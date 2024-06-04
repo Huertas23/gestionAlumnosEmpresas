@@ -51,15 +51,15 @@ public class EmpresaController {
     	  // Crear el objeto Alumno con los datos convertidos
     	  Empresa empresaObj = new Empresa();
     	  empresaObj.setCif((String) empresaMap.get("cif"));
-    	  empresaObj.setRazonSocial((String) empresaMap.get("razon_social"));
-    	  empresaObj.setDomicilioSocial((String) empresaMap.get("domicilio_social"));
-    	  String fechaFirmaString = (String) empresaMap.get("fecha_firma");
+    	  empresaObj.setRazonSocial((String) empresaMap.get("razonSocial"));
+    	  empresaObj.setDomicilioSocial((String) empresaMap.get("domicilioSocial"));
+    	  String fechaFirmaString = (String) empresaMap.get("fechaFirma");
     	  empresaObj.setFechaFirma(formatter.parse(fechaFirmaString));
-    	  empresaObj.setDireccionPracticas((String) empresaMap.get("direccion_practicas"));
-    	  empresaObj.setTutorLaboral((String) empresaMap.get("tutor_laboral"));
-    	  empresaObj.setDniTutorLaboral((String) empresaMap.get("dni_tutor_laboral"));
-    	  empresaObj.setRepresentanteLegal((String) empresaMap.get("representante_legal"));
-     	  empresaObj.setDniRepresentante((String) empresaMap.get("dni_representante"));
+    	  empresaObj.setDireccionPracticas((String) empresaMap.get("direccionPracticas"));
+    	  empresaObj.setTutorLaboral((String) empresaMap.get("tutorLaboral"));
+    	  empresaObj.setDniTutorLaboral((String) empresaMap.get("dniTutorLaboral"));
+    	  empresaObj.setRepresentanteLegal((String) empresaMap.get("representanteLegal"));
+     	  empresaObj.setDniRepresentante((String) empresaMap.get("dniRepresentante"));
     	  return empresaObj;
     }
 }

@@ -5,5 +5,5 @@ export interface Alumno {
   dni: string;
   centroPracticas: string;
   empresa_id?: number;
-  tutor_centro_id?: number;
+  tutorCentroId?: number;
 }

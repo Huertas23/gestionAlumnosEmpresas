@@ -19,11 +19,11 @@ public class Alumno {
     private String centroPracticas;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "empresaId")
     private Empresa empresa;
 
     @ManyToOne
-    @JoinColumn(name = "tutor_centro_id")
+    @JoinColumn(name = "tutorCentroId")
     private Tutor tutorCentro;
 
 	public Long getId() {

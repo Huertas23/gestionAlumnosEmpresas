@@ -12,27 +12,27 @@ export class EmpresasListComponent implements OnInit {
   empresas: Empresa[] = [
     {
       id: 1,
-      razon_social: 'Tech Solutions',
-      domicilio_social: 'Calle Falsa 123',
+      razonSocial: 'Tech Solutions',
+      domicilioSocial: 'Calle Falsa 123',
       cif: 'A12345678',
-      fecha_firma: new Date(),
-      direccion_practicas: 'Calle Practicas 123',
-      tutor_laboral: 'Carlos López',
-      dni_tutor_laboral: '12345678A',
-      representante_legal: 'Ana García',
-      dni_representante: '87654321B',
+      fechaFirma: new Date(),
+      direccionPracticas: 'Calle Practicas 123',
+      tutorLaboral: 'Carlos López',
+      dniTutorLaboral: '12345678A',
+      representanteLegal: 'Ana García',
+      dniRepresentante: '87654321B',
     },
     {
       id: 2,
-      razon_social: 'Innovative Startups',
-      domicilio_social: 'Avenida Siempre Viva 742',
+      razonSocial: 'Innovative Startups',
+      domicilioSocial: 'Avenida Siempre Viva 742',
       cif: 'B87654321',
-      fecha_firma: new Date(),
-      direccion_practicas: 'Avenida Practicas 742',
-      tutor_laboral: 'María Sánchez',
-      dni_tutor_laboral: '87654321B',
-      representante_legal: 'Luis Pérez',
-      dni_representante: '12345678A',
+      fechaFirma: new Date(),
+      direccionPracticas: 'Avenida Practicas 742',
+      tutorLaboral: 'María Sánchez',
+      dniTutorLaboral: '87654321B',
+      representanteLegal: 'Luis Pérez',
+      dniRepresentante: '12345678A',
     },
   ];
 
@@ -41,13 +41,16 @@ export class EmpresasListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     // Aquí podrías cargar las empresas mediante una llamada a la API
     const empresasList = await this.getEmpresas();
-    this.empresas.push(empresasList);
+    empresasList.forEach((element: Empresa) => {
+      this.empresas.push(element);
+    });
   }
 
   async getEmpresas() {
     const empresas = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.empresas
     );
+    console.log(empresas);
     return empresas;
   }
 }
