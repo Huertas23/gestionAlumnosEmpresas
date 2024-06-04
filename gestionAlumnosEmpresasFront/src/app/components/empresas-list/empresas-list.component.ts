@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Empresa } from '../../models/empresa.model';
+import { HttpService } from 'src/app/services/httpService';
+import { CONSTANTES } from 'src/app/config/Constants';
 
 @Component({
   selector: 'app-empresas-list',
@@ -34,9 +36,18 @@ export class EmpresasListComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private httpService: HttpService) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     // Aquí podrías cargar las empresas mediante una llamada a la API
+    const empresasList = await this.getEmpresas();
+    this.empresas.push(empresasList);
+  }
+
+  async getEmpresas() {
+    const empresas = await this.httpService.get(
+      CONSTANTES.apiUrl + CONSTANTES.empresas
+    );
+    return empresas;
   }
 }
