@@ -3,7 +3,7 @@ export interface Alumno {
   nombre: string;
   apellido: string;
   dni: string;
-  centro_practicas: string;
+  centroPracticas: string;
   empresa_id?: number;
   tutor_centro_id?: number;
 }

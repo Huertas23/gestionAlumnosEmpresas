@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tutor } from '../models/tutor.model';
+import { Tutor } from '../../models/tutor.model';
 
 @Component({
   selector: 'app-add-tutor',
   templateUrl: './add-tutor.component.html',
-  styleUrls: ['./add-tutor.component.css']
+  styleUrls: ['./add-tutor.component.css'],
 })
 export class AddTutorComponent {
   tutor: Tutor = {
     nombre: '',
     dni_responsable: '',
     tipo: 'centro', // o 'empresa', según el caso
-    curso: ''
+    curso: '',
   };
 
   constructor(private router: Router) {}
