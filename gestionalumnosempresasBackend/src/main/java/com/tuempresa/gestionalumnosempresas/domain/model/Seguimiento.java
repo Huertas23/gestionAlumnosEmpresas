@@ -15,11 +15,11 @@ public class Seguimiento {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "alumno_id", nullable = false)
+    @JoinColumn(name = "alumno_id")
     private Alumno alumno;
 
     @ManyToOne
-    @JoinColumn(name = "id_empresa", nullable = false)
+    @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
     private Date fechaSeguimiento;

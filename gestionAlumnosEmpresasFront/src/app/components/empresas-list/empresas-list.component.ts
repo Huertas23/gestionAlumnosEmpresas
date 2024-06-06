@@ -9,32 +9,7 @@ import { CONSTANTES } from 'src/app/config/Constants';
   styleUrls: ['./empresas-list.component.css'],
 })
 export class EmpresasListComponent implements OnInit {
-  empresas: Empresa[] = [
-    {
-      id: 1,
-      razonSocial: 'Tech Solutions',
-      domicilioSocial: 'Calle Falsa 123',
-      cif: 'A12345678',
-      fechaFirma: new Date(),
-      direccionPracticas: 'Calle Practicas 123',
-      tutorLaboral: 'Carlos López',
-      dniTutorLaboral: '12345678A',
-      representanteLegal: 'Ana García',
-      dniRepresentante: '87654321B',
-    },
-    {
-      id: 2,
-      razonSocial: 'Innovative Startups',
-      domicilioSocial: 'Avenida Siempre Viva 742',
-      cif: 'B87654321',
-      fechaFirma: new Date(),
-      direccionPracticas: 'Avenida Practicas 742',
-      tutorLaboral: 'María Sánchez',
-      dniTutorLaboral: '87654321B',
-      representanteLegal: 'Luis Pérez',
-      dniRepresentante: '12345678A',
-    },
-  ];
+  empresas: Empresa[] = [];
 
   constructor(private httpService: HttpService) {}
 

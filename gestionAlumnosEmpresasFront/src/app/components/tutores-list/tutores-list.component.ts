@@ -9,20 +9,7 @@ import { CONSTANTES } from 'src/app/config/Constants';
   styleUrls: ['./tutores-list.component.css'],
 })
 export class TutoresListComponent implements OnInit {
-  tutores: Tutor[] = [
-    {
-      id: 1,
-      curso: '1A',
-      nombre: 'Carlos García',
-      dni_responsable: '12345678A',
-    },
-    {
-      id: 2,
-      curso: '2B',
-      nombre: 'María López',
-      dni_responsable: '87654321B',
-    },
-  ];
+  tutores: Tutor[] = [];
 
   constructor(private httpService: HttpService) {}
 
