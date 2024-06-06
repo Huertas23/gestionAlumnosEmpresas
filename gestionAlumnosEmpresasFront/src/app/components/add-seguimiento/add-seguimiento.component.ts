@@ -15,13 +15,14 @@ export class AddSeguimientoComponent implements OnInit {
   seguimiento: Seguimiento = {
     alumno_id: undefined,
     tutor_id: undefined,
-    fecha_seguimiento: undefined,
+    fecha_seguimiento: any,
     informe_final: '',
   };
   alumno?: any;
   empresa?: any = [];
   alumnos: any = [];
   alumnoId: any;
+  tutoresLaborales : any = [];
 
   constructor(
     private router: Router,
@@ -52,8 +53,6 @@ export class AddSeguimientoComponent implements OnInit {
         this.empresa = this.alumno.empresa;
         this.seguimiento.alumno_id = this.alumno.id;
         this.seguimiento.tutor_id = this.empresa?.tutorLaboral
-          ? this.getTutorIdByNombre(this.empresa.tutorLaboral)
-          : undefined;
       }
     }
   }
@@ -80,25 +79,6 @@ export class AddSeguimientoComponent implements OnInit {
     return alumno.empresa ? alumno.empresa.tutorLaboral : 'No asignado';
   }
 
-  getTutorIdByNombre(nombre: string): number | undefined {
-    const tutoresLaborales = [
-      {
-        id: 1,
-        nombre: 'Carlos López',
-        dni_responsable: '12345678A',
-        tipo: 'empresa',
-      },
-      {
-        id: 2,
-        nombre: 'María Sánchez',
-        dni_responsable: '87654321B',
-        tipo: 'empresa',
-      },
-    ];
-    const tutor = tutoresLaborales.find((t) => t.nombre === nombre);
-    return tutor ? tutor.id : undefined;
-  }
-
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -111,10 +91,10 @@ export class AddSeguimientoComponent implements OnInit {
     const formData = new FormData();
     formData.append('alumno_id', this.alumnoId);
     formData.append('tutor_id', this.alumno.tutor);
+    const fecha = this.seguimiento.fecha_seguimiento?.toString().length >0 ? this.seguimiento.fecha_seguimiento?.toString():'';
     formData.append(
-      'fecha_seguimiento',
-      this.seguimiento.fecha_seguimiento!.toISOString()
-    );
+      'fecha_seguimiento', fecha);
+      
     formData.append('informe_final', this.seguimiento.informe_final);
     if (this.seguimiento.archivo_pdf) {
       formData.append('archivo_pdf', this.seguimiento.archivo_pdf);

@@ -1,9 +1,11 @@
 package com.tuempresa.gestionalumnosempresas.infrastructure.adapter.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.tuempresa.gestionalumnosempresas.application.port.in.AlumnoUseCase;
 import com.tuempresa.gestionalumnosempresas.domain.model.Alumno;
 import com.tuempresa.gestionalumnosempresas.domain.model.Empresa;
@@ -33,14 +37,11 @@ public class AlumnoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveAlumno(@RequestBody Map<String, Object> alumnoMap) {
-        try {
+    public Alumno saveAlumno(@RequestBody Map<String, Object> alumnoMap)throws JsonMappingException, JsonProcessingException, ParseException  {
+
             Alumno alum = mapperModel(alumnoMap);
-            alumnoUseCase.saveAlumno(alum);
-            return ResponseEntity.ok("Alumno guardado exitosamente");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error guardando el alumno: " + e.getMessage());
-        }
+            return alumnoUseCase.saveAlumno(alum);
+            
     }
 
     @DeleteMapping("/{id}")

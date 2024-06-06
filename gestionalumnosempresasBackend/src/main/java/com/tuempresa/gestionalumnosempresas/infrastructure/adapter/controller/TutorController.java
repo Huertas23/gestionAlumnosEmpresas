@@ -43,7 +43,8 @@ public class TutorController {
     public Tutor mapperModel(Map<String, Object> tutoresMap) throws ParseException {
         Tutor tutorObj = new Tutor();
         tutorObj.setCurso((String) tutoresMap.get("curso"));
-        tutorObj.setDniResponsable((String) tutoresMap.get("dni_responsable"));
+        System.out.println("Hola"+tutoresMap.get("dniResponsable"));
+        tutorObj.setDniResponsable((String) tutoresMap.get("dniResponsable"));
         tutorObj.setNombre((String) tutoresMap.get("nombre"));
         return tutorObj;
     }
