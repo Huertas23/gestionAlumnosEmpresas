@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Seguimiento } from '../../models/seguimiento.model';
 import { Alumno } from '../../models/alumno.model';
 import { Empresa } from '../../models/empresa.model';
+import { CONSTANTES } from 'src/app/config/Constants';
+import { HttpService } from 'src/app/services/httpService';
 
 @Component({
   selector: 'app-add-seguimiento',
@@ -18,11 +20,16 @@ export class AddSeguimientoComponent implements OnInit {
   };
   alumno?: Alumno;
   empresa?: Empresa;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  alumnos:any;
+  
+  constructor(private router: Router, private httpService: HttpService) {}
 
   ngOnInit(): void {
     // Aquí cargarías los alumnos y empresas mediante una llamada a la API
+    const empresasList = await this.getAlumnos();
+    empresasList.forEach((element: Alumno) => {
+      this.alumnos.push(element);
+    });
     const alumnos: Alumno[] = [
       {
         id: 1,
@@ -70,7 +77,7 @@ export class AddSeguimientoComponent implements OnInit {
       },
     ];
 
-    this.route.queryParams.subscribe((params) => {
+    this.router.queryParams.subscribe((params) => {
       const alumnoId = params['alumnoId'];
       if (alumnoId) {
         this.alumno = alumnos.find((a) => a.id === +alumnoId);
@@ -83,6 +90,33 @@ export class AddSeguimientoComponent implements OnInit {
         }
       }
     });
+  }
+  }
+
+
+
+
+  async getAlumnos() {
+    const alumnos = await this.httpService.get(
+      CONSTANTES.apiUrl + CONSTANTES.alumnos
+    );
+    console.log(alumnos);
+    return alumnos
+  }
+
+
+  getEmpresaNombre(alumno: any | undefined): string {
+    if (alumno === undefined) {
+      return 'No asignada';
+    }
+    return alumno.empresa ? alumno.empresa.razonSocial : 'No asignada';
+  }
+
+  getTutorLaboral(alumno: any | undefined): string {
+    if (alumno === undefined) {
+      return 'No asignado';
+    }
+    return alumno.empresa ? alumno.empresa.tutorLaboral : 'No asignado';
   }
 
   getTutorIdByNombre(nombre: string): number | undefined {
