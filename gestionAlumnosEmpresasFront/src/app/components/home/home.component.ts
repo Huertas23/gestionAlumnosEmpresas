@@ -84,19 +84,17 @@ export class HomeComponent implements OnInit {
     this.alumnos.sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
-  getEmpresaNombre(empresaId: number | undefined): string {
-    if (empresaId === undefined) {
+  getEmpresaNombre(alumno: any | undefined): string {
+    if (alumno === undefined) {
       return 'No asignada';
     }
-    const empresa = this.empresas.find((e) => e.id === empresaId);
-    return empresa ? empresa.razonSocial : 'No asignada';
+    return alumno.empresa ? alumno.empresa.razonSocial : 'No asignada';
   }
 
-  getTutorLaboral(empresaId: number | undefined): string {
-    if (empresaId === undefined) {
+  getTutorLaboral(alumno: any | undefined): string {
+    if (alumno === undefined) {
       return 'No asignado';
     }
-    const empresa = this.empresas.find((e) => e.id === empresaId);
-    return empresa ? empresa.tutorLaboral : 'No asignado';
+    return alumno.empresa ? alumno.empresa.tutorLaboral : 'No asignado';
   }
 }

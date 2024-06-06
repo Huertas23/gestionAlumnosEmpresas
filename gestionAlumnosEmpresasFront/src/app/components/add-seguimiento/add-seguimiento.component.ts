@@ -90,13 +90,13 @@ export class AddSeguimientoComponent implements OnInit {
       {
         id: 1,
         nombre: 'Carlos López',
-        dni_responsable: '12345678A',
+        dniResponsable: '12345678A',
         tipo: 'empresa',
       },
       {
         id: 2,
         nombre: 'María Sánchez',
-        dni_responsable: '87654321B',
+        dniResponsable: '87654321B',
         tipo: 'empresa',
       },
     ];

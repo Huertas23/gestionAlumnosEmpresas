@@ -67,6 +67,8 @@ export class AlumnosListComponent implements OnInit {
     empresasList.forEach((element: Alumno) => {
       this.alumnos.push(element);
     });
+    console.log(empresasList);
+    console.log(this.alumnos);
     this.ordenarAlumnos();
   }
 
@@ -83,12 +85,11 @@ export class AlumnosListComponent implements OnInit {
     this.alumnos.sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
-  getEmpresaNombre(empresaId: number | undefined): string {
-    if (empresaId === undefined) {
+  getEmpresaNombre(alumno: any | undefined): string {
+    if (alumno === undefined) {
       return 'No asignada';
     }
-    const empresa = this.empresas.find((e) => e.id === empresaId);
-    return empresa ? empresa.razonSocial : 'No asignada';
+    return alumno.empresa ? alumno.empresa.razonSocial : 'No asignada';
   }
 
   agregarSeguimiento(alumnoId: number | undefined) {

@@ -13,8 +13,8 @@
       <tbody>
         <tr *ngFor="let alumno of alumnos">
           <td>{{ alumno.nombre }} {{ alumno.apellido }}</td>
-          <td>{{ getEmpresaNombre(alumno.empresa_id) }}</td>
-          <td>{{ getTutorLaboral(alumno.empresa_id) }}</td>
+          <td>{{ getEmpresaNombre(alumno) }}</td>
+          <td>{{ getTutorLaboral(alumno) }}</td>
         </tr>
       </tbody>
     </table>
