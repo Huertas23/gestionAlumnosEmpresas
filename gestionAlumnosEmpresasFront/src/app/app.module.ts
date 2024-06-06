@@ -15,6 +15,7 @@ import { TutoresListComponent } from './components/tutores-list/tutores-list.com
 import { HttpService } from './services/httpService';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { SeguimientosListComponent } from './components/seguimientos-list/seguimientos-list.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     AddTutorComponent,
     AddSeguimientoComponent,
     TutoresListComponent,
+    SeguimientosListComponent,
   ],
   imports: [
     BrowserModule,

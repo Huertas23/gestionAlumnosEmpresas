@@ -9,6 +9,8 @@ import { TutoresListComponent } from './components/tutores-list/tutores-list.com
 import { AddTutorComponent } from './components/add-tutor/add-tutor.component';
 import { LoginComponent } from './components/login/login.component';
 import { AddSeguimientoComponent } from './components/add-seguimiento/add-seguimiento.component';
+import { SeguimientosListComponent } from './components/seguimientos-list/seguimientos-list.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -21,6 +23,7 @@ const routes: Routes = [
   { path: 'add-tutor', component: AddTutorComponent },
   { path: 'login', component: LoginComponent },
   { path: 'add-seguimiento', component: AddSeguimientoComponent },
+  { path: 'seguimientos-list', component: SeguimientosListComponent },
 ];
 
 @NgModule({

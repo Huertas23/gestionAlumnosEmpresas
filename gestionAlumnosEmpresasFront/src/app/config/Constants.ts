@@ -3,4 +3,5 @@ export const CONSTANTES = {
   alumnos: '/alumnos',
   empresas: '/empresas',
   tutores: '/tutores',
+  seguimientos: 'seguimientos'
 };

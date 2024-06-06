@@ -1,0 +1,22 @@
+<div class="seguimientos-list">
+    <h2>Lista de Seguimientos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha de Seguimiento</th>
+          <th>Informe Final</th>
+          <th>PDF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let seguimiento of seguimientos">
+          <td>{{ seguimiento.id }}</td>
+          <td>{{ seguimiento.fecha_seguimiento | date }}</td>
+          <td>{{ seguimiento.informe_final }}</td>
+          <td><a [href]="seguimiento.archivo_pdf?.name" target="_blank">Ver PDF</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

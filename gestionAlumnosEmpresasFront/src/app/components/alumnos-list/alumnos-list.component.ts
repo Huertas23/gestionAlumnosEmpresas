@@ -98,6 +98,14 @@ export class AlumnosListComponent implements OnInit {
       });
     }
   }
+
+    verSeguimientos(alumnoId: number | undefined) {
+      if (alumnoId !== undefined) {
+        this.router.navigate(['/seguimientos-list'], {
+          queryParams: { alumnoId: alumnoId },
+        });
+      }
+  }
 }
 
 /*
