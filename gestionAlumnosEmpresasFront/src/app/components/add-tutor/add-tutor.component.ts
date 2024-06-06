@@ -12,7 +12,7 @@ import { CONSTANTES } from 'src/app/config/Constants';
 export class AddTutorComponent {
   tutor: Tutor = {
     nombre: '',
-    dniResponsable: '',
+    dni_responsable: '',
     curso: '',
   };
 

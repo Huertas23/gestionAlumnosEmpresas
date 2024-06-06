@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/seguimientos")
 public class SeguimientoController {
 
@@ -20,8 +21,8 @@ public class SeguimientoController {
     }
 
     @PostMapping
-    public Seguimiento saveSeguimiento(@RequestBody Seguimiento seguimiento) {
-        return seguimientoUseCase.saveSeguimiento(seguimiento);
+    public void saveSeguimiento(@RequestBody Seguimiento seguimiento) {
+        seguimientoUseCase.saveSeguimiento(seguimiento);
     }
 
     @DeleteMapping("/{id}")

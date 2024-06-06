@@ -44,17 +44,14 @@ public class AlumnoController {
     private Alumno mapperModel(Map<String, Object> alumnoMap) {
         Long empresaId = Long.valueOf(alumnoMap.get("empresa_id").toString());
         Long tutorCentroId = Long.valueOf(alumnoMap.get("tutorCentroId").toString());
-
         Alumno alumnoObj = new Alumno();
         alumnoObj.setNombre(alumnoMap.get("nombre").toString());
         alumnoObj.setApellido(alumnoMap.get("apellido").toString());
         alumnoObj.setDni(alumnoMap.get("dni").toString());
         alumnoObj.setCentroPracticas(alumnoMap.get("centroPracticas").toString());
-
         Empresa empresa = new Empresa();
         empresa.setId(empresaId);
         alumnoObj.setEmpresa(empresa);
-
         Tutor tutorCentro = new Tutor();
         tutorCentro.setId(tutorCentroId);
         alumnoObj.setTutorCentro(tutorCentro);

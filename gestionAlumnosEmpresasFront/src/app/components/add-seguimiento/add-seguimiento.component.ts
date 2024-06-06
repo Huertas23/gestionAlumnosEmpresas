@@ -19,14 +19,19 @@ export class AddSeguimientoComponent implements OnInit {
     informe_final: '',
   };
   alumno?: any;
-  empresa?: any;
-  alumnos: any;
+  empresa?: any = [];
+  alumnos: any = [];
+  alumnoId: any;
 
   constructor(
     private router: Router,
     private httpService: HttpService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.alumnoId = params['alumnoId'];
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     // Aquí cargarías los alumnos y empresas mediante una llamada a la API
@@ -35,21 +40,22 @@ export class AddSeguimientoComponent implements OnInit {
       this.alumnos.push(element);
     });
 
-    this.route.queryParams.subscribe((params) => {
-      const alumnoId = params['alumnoId'];
-      if (alumnoId) {
-        this.alumno = this.alumnos.find((a) => a.id === +alumnoId);
-        if (this.alumno) {
-          this.empresa = this.alumno.empresas.find(
-            (e) => e.id === this.alumno!.empresa_id
-          );
-          this.seguimiento.alumno_id = this.alumno.id;
-          this.seguimiento.tutor_id = this.empresa?.tutorLaboral
-            ? this.getTutorIdByNombre(this.empresa.tutorLaboral)
-            : undefined;
+    if (this.alumnoId) {
+      this.alumno = this.alumnos.find((a: any) => {
+        console.log(a.id == this.alumnoId);
+        if(a.id == this.alumnoId){
+          return a;
         }
+        
+      });
+      if (this.alumno) {
+        this.empresa = this.alumno.empresa;
+        this.seguimiento.alumno_id = this.alumno.id;
+        this.seguimiento.tutor_id = this.empresa?.tutorLaboral
+          ? this.getTutorIdByNombre(this.empresa.tutorLaboral)
+          : undefined;
       }
-    });
+    }
   }
 
   async getAlumnos() {
@@ -79,13 +85,13 @@ export class AddSeguimientoComponent implements OnInit {
       {
         id: 1,
         nombre: 'Carlos López',
-        dniResponsable: '12345678A',
+        dni_responsable: '12345678A',
         tipo: 'empresa',
       },
       {
         id: 2,
         nombre: 'María Sánchez',
-        dniResponsable: '87654321B',
+        dni_responsable: '87654321B',
         tipo: 'empresa',
       },
     ];
@@ -100,11 +106,11 @@ export class AddSeguimientoComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     // Aquí añadirías la lógica para guardar el seguimiento, por ejemplo, llamar a un servicio de API
     const formData = new FormData();
-    formData.append('alumno_id', this.seguimiento.alumno_id!.toString());
-    formData.append('tutor_id', this.seguimiento.tutor_id!.toString());
+    formData.append('alumno_id', this.alumnoId);
+    formData.append('tutor_id', this.alumno.tutor);
     formData.append(
       'fecha_seguimiento',
       this.seguimiento.fecha_seguimiento!.toISOString()
@@ -116,6 +122,9 @@ export class AddSeguimientoComponent implements OnInit {
 
     // Aquí deberías enviar formData a tu servicio de API
     console.log('Nuevo seguimiento:', formData);
+    const alumnos = await this.httpService.post(
+      CONSTANTES.apiUrl + CONSTANTES.seguimientos, formData
+    );
 
     // Después de guardar, redirigir a otra página si es necesario
     this.router.navigate(['/seguimientos']);
