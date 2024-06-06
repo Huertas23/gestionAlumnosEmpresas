@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Alumno } from '../../models/alumno.model';
 import { Tutor } from '../../models/tutor.model';
@@ -11,7 +11,7 @@ import { CONSTANTES } from '../../config/Constants';
   templateUrl: './add-alumno.component.html',
   styleUrls: ['./add-alumno.component.css'],
 })
-export class AddAlumnoComponent {
+export class AddAlumnoComponent implements OnInit {
   alumno: Alumno = {
     nombre: '',
     apellido: '',
@@ -21,52 +21,22 @@ export class AddAlumnoComponent {
     tutorCentroId: undefined,
   };
 
-  empresas: Empresa[] = [
-    {
-      id: 1,
-      razonSocial: 'Tech Solutions',
-      domicilioSocial: 'Calle Falsa 123',
-      cif: 'A12345678',
-      fechaFirma: new Date(),
-      direccionPracticas: 'Calle Practicas 123',
-      tutorLaboral: 'Carlos López',
-      dniTutorLaboral: '12345678A',
-      representanteLegal: 'Ana García',
-      dniRepresentante: '87654321B',
-    },
-    {
-      id: 2,
-      razonSocial: 'Innovative Startups',
-      domicilioSocial: 'Avenida Siempre Viva 742',
-      cif: 'B87654321',
-      fechaFirma: new Date(),
-      direccionPracticas: 'Avenida Practicas 742',
-      tutorLaboral: 'María Sánchez',
-      dniTutorLaboral: '87654321B',
-      representanteLegal: 'Luis Pérez',
-      dniRepresentante: '12345678A',
-    },
-  ];
-
-  tutoresCentro: Tutor[] = [
-    {
-      id: 1,
-      nombre: 'Carlos García',
-      dni_responsable: '12345678A',
-    },
-    {
-      id: 2,
-      nombre: 'María López',
-      dni_responsable: '87654321B',
-
-    },
-  ];
+  empresas: Empresa[] = [];
+  tutoresCentro: Tutor[] = [];
+  selectedEmpresa: Empresa | undefined;
 
   constructor(private router: Router, private httpService: HttpService) {}
 
+  async ngOnInit(): Promise<void> {
+    // Cargar las empresas desde la API
+    this.empresas = await this.getEmpresas();
+
+    // Cargar los tutores del centro
+    this.tutoresCentro = await this.getTutores();
+  }
 
   async onSubmit() {
-    // Lógica para guardar el alumno
+    // Guardar el alumno
     console.log('Nuevo alumno:', this.alumno);
     await this.httpService.post(
       CONSTANTES.apiUrl + CONSTANTES.alumnos,
@@ -74,27 +44,34 @@ export class AddAlumnoComponent {
     );
     this.router.navigate(['/alumnos']);
   }
-  async ngOnInit(): Promise<void> {
-    // Aquí podrías cargar las empresas mediante una llamada a la API
-    const empresasList = await this.getEmpresas();
-    empresasList.forEach((element: Empresa) => {
-      this.empresas.push(element);
-    });
-  }
 
   async getEmpresas() {
     const empresas = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.empresas
     );
-    console.log(empresas);
     return empresas;
   }
 
   async getTutores() {
-    const empresas = await this.httpService.get(
-      CONSTANTES.apiUrl + CONSTANTES.empresas
+    const tutores = await this.httpService.get(
+      CONSTANTES.apiUrl + CONSTANTES.tutores
     );
-    console.log(empresas);
-    return empresas;
+    return tutores;
+  }
+
+  onEmpresaChange(event: any) {
+    const empresaId = event.target.value;
+    if (empresaId !== undefined) {
+      this.selectedEmpresa = this.empresas.find((empresa) => empresa.id == empresaId);
+      if (this.selectedEmpresa) {
+        this.alumno.centroPracticas = this.selectedEmpresa.razonSocial;
+      } else {
+        this.alumno.centroPracticas = ''; // Establecer en vacío si no se encuentra la empresa
+      }
+    } else {
+      this.selectedEmpresa = undefined;
+      this.alumno.centroPracticas = ''; // Establecer en vacío si no se selecciona ninguna empresa
+    }
   }
 }
+

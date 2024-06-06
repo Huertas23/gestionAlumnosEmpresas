@@ -1,12 +1,10 @@
 package com.tuempresa.gestionalumnosempresas.infrastructure.adapter.controller;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tuempresa.gestionalumnosempresas.application.port.in.AlumnoUseCase;
 import com.tuempresa.gestionalumnosempresas.domain.model.Alumno;
 import com.tuempresa.gestionalumnosempresas.domain.model.Empresa;
 import com.tuempresa.gestionalumnosempresas.domain.model.Tutor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +16,6 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/api/alumnos")
 public class AlumnoController {
-	
-	ObjectMapper mapper = new ObjectMapper();
-	  Map<String, Object> alumnoMap;
 
     @Autowired
     private AlumnoUseCase alumnoUseCase;
@@ -31,37 +26,41 @@ public class AlumnoController {
     }
 
     @PostMapping
-    public void saveAlumno(@RequestBody String alumno) throws Exception {
+    public ResponseEntity<?> saveAlumno(@RequestBody Map<String, Object> alumnoMap) {
         try {
-			alumnoMap = mapper.readValue(alumno, Map.class);
-			Alumno alum = mapperModel(alumnoMap);
-			alumnoUseCase.saveAlumno(alum);
-		} catch (JsonMappingException e) {
-			throw new Exception(e.getMessage());    }
+            Alumno alum = mapperModel(alumnoMap);
+            alumnoUseCase.saveAlumno(alum);
+            return ResponseEntity.ok("Alumno guardado exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error guardando el alumno: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteAlumno(@PathVariable Long id) {
         alumnoUseCase.deleteAlumno(id);
     }
-    
-    public Alumno mapperModel( Map<String, Object> alumnoMap ) {
-    	Long empresaId = Long.valueOf((String) alumnoMap.get("empresaId"));
-    	  Long tutorCentroId = Long.valueOf((String) alumnoMap.get("tutorCentroId"));
 
-    	  // Crear el objeto Alumno con los datos convertidos
-    	  Alumno alumnoObj = new Alumno();
-    	  alumnoObj.setNombre((String) alumnoMap.get("nombre"));
-    	  alumnoObj.setApellido((String) alumnoMap.get("apellido"));
-    	  alumnoObj.setDni((String) alumnoMap.get("dni"));
-    	  alumnoObj.setCentroPracticas((String) alumnoMap.get("centroPracticas"));
-    	  Empresa empresa = new Empresa(); // Buscar la empresa por id (logica adicional)
-    	  empresa.setId(empresaId);
-    	  alumnoObj.setEmpresa(empresa);
-    	  Tutor tutorCentro = new Tutor(); // Buscar el tutor por id (logica adicional)
-    	  tutorCentro.setId(tutorCentroId);
-    	  alumnoObj.setTutorCentro(tutorCentro);
-    	  return alumnoObj;
+    private Alumno mapperModel(Map<String, Object> alumnoMap) {
+        Long empresaId = Long.valueOf(alumnoMap.get("empresa_id").toString());
+        Long tutorCentroId = Long.valueOf(alumnoMap.get("tutorCentroId").toString());
+
+        Alumno alumnoObj = new Alumno();
+        alumnoObj.setNombre(alumnoMap.get("nombre").toString());
+        alumnoObj.setApellido(alumnoMap.get("apellido").toString());
+        alumnoObj.setDni(alumnoMap.get("dni").toString());
+        alumnoObj.setCentroPracticas(alumnoMap.get("centroPracticas").toString());
+
+        Empresa empresa = new Empresa();
+        empresa.setId(empresaId);
+        alumnoObj.setEmpresa(empresa);
+
+        Tutor tutorCentro = new Tutor();
+        tutorCentro.setId(tutorCentroId);
+        alumnoObj.setTutorCentro(tutorCentro);
+
+        return alumnoObj;
     }
 }
+
 

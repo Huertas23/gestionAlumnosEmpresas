@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface EmpresaUseCase {
     List<Empresa> getAllEmpresas();
+    Empresa getEmpresaById(Long id);
     Empresa saveEmpresa(Empresa empresa);
     void deleteEmpresa(Long id);
 }

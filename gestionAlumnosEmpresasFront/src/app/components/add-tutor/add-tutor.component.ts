@@ -22,7 +22,7 @@ export class AddTutorComponent {
     // Lógica para guardar el tutor
     console.log('Nuevo tutor:', this.tutor);
     this.httpService.post(
-      CONSTANTES.apiUrl,
+      CONSTANTES.apiUrl + CONSTANTES.tutores,
       this.tutor
     );
     this.router.navigate(['/tutores']);

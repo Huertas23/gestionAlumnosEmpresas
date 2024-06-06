@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutor } from '../../models/tutor.model';
+import { HttpService } from 'src/app/services/httpService';
+import { CONSTANTES } from 'src/app/config/Constants';
 
 @Component({
   selector: 'app-tutores-list',
@@ -22,9 +24,21 @@ export class TutoresListComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private httpService: HttpService) {}
 
-  ngOnInit(): void {
-    // Aquí podrías cargar los tutores mediante una llamada a la API
+  async ngOnInit(): Promise<void> {
+    // Aquí podrías cargar las empresas mediante una llamada a la API
+    const tutoresList = await this.getTutores();
+    tutoresList.forEach((element: Tutor) => {
+      this.tutores.push(element);
+    });
+  }
+
+  async getTutores() {
+    const tutores = await this.httpService.get(
+      CONSTANTES.apiUrl + CONSTANTES.tutores
+    );
+    console.log(tutores);
+    return tutores;
   }
 }

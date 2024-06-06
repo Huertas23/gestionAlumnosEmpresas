@@ -13,7 +13,8 @@ public class Tutor {
 
     private String curso;
     private String nombre;
-    private String dniResponsable;
+    private String dni_responsable;
+    
 	public Long getId() {
 		return id;
 	}
@@ -33,10 +34,10 @@ public class Tutor {
 		this.nombre = nombre;
 	}
 	public String getDniResponsable() {
-		return dniResponsable;
+		return dni_responsable;
 	}
 	public void setDniResponsable(String dniResponsable) {
-		this.dniResponsable = dniResponsable;
+		this.dni_responsable = dniResponsable;
 	}
 
     // Getters y Setters

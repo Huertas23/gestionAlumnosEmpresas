@@ -39,6 +39,12 @@ public class EmpresaController {
     	Empresa emp = mapperModel(empresaMap);
       empresaUseCase.saveEmpresa(emp);
     }
+    
+    @GetMapping("/{id}")
+    public Empresa getEmpresaById(@PathVariable Long id) {
+        return empresaUseCase.getEmpresaById(id);
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteEmpresa(@PathVariable Long id) {

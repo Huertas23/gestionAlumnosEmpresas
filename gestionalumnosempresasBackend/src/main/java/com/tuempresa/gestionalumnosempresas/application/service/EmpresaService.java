@@ -28,4 +28,10 @@ public class EmpresaService implements EmpresaUseCase {
     public void deleteEmpresa(Long id) {
         empresaRepository.deleteById(id);
     }
+
+	@Override
+	public Empresa getEmpresaById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
