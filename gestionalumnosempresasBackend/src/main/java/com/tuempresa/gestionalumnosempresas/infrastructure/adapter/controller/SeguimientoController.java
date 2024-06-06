@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class SeguimientoController {
     public void saveSeguimiento(@RequestBody String seguimiento) throws JsonMappingException, JsonProcessingException, ParseException {
     	seguimientoMap = mapper.readValue(seguimiento, Map.class);
     	Seguimiento segui = mapperModel(seguimientoMap);
-        seguimientoUseCase.saveSeguimiento(seguimiento);
+        seguimientoUseCase.saveSeguimiento(segui);
     }
 
     @DeleteMapping("/{id}")
@@ -44,12 +45,22 @@ public class SeguimientoController {
         seguimientoUseCase.deleteSeguimiento(id);
     }
     
-    private Seguimiento mapperModel(Map<String, Object> seguientoMap) {
+    private Seguimiento mapperModel(Map<String, Object> seguientoMap) throws ParseException {
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
    
-        Seguimiento nuevo= new Seguimiento();
-        nuevo.setAlumno(Long.parseLong(seguientoMap.get("id").toString()))
-        nuevo.setAlumno(Long.parseLong(seguientoMap.get("id").toString()));
+        Seguimiento seguimientoObject= new Seguimiento();
+        Alumno alumno = new Alumno();
+        Empresa empresa = new Empresa();
+        alumno.setId(Long.parseLong(seguientoMap.get("alumno_id").toString()));
+        empresa.setId(Long.parseLong(seguientoMap.get("tutor_id").toString()));
+        
+        seguimientoObject.setAlumno(alumno);
+        seguimientoObject.setEmpresa(empresa);
+        String fechaSeguimiento = (String) seguientoMap.get("fecha_seguimiento");
+  	  	seguimientoObject.setFechaSeguimiento(formatter.parse(fechaSeguimiento));
+  	  	seguimientoObject.setInformeFinal(seguientoMap.get("informe_final").toString());
+  	  	System.out.println(seguimientoObject);
 
-        return alumnoObj;
+        return seguimientoObject;
     }
 }

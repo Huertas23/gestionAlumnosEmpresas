@@ -15,7 +15,7 @@ export class AddSeguimientoComponent implements OnInit {
   seguimiento: Seguimiento = {
     alumno_id: undefined,
     tutor_id: undefined,
-    fecha_seguimiento: any,
+    fecha_seguimiento: undefined,
     informe_final: '',
   };
   alumno?: any;
@@ -91,7 +91,7 @@ export class AddSeguimientoComponent implements OnInit {
     const fecha = this.seguimiento.fecha_seguimiento?.toString();
     const body = {
       alumno_id: this.alumnoId,
-      tutor_id: this.alumno.tutor,
+      tutor_id: this.alumno.empresa.id,
       fecha_seguimiento: fecha,
       informe_final: this.seguimiento.informe_final,
       archivo_pdf: this.seguimiento.archivo_pdf,

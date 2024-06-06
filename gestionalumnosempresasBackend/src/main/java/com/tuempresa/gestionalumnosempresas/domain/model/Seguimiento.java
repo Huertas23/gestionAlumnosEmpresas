@@ -16,11 +16,11 @@ public class Seguimiento {
 
     @ManyToOne
     @JoinColumn(name = "alumno_id")
-    private long alumno;
+    private Alumno alumno;
 
     @ManyToOne
     @JoinColumn(name = "id_empresa")
-    private long empresa;
+    private Empresa empresa;
 
     private Date fechaSeguimiento;
     private String informeFinal;
@@ -36,19 +36,19 @@ public class Seguimiento {
         this.id = id;
     }
 
-    public long getAlumno() {
+    public Alumno getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(long alumno) {
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    public long getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(long empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
