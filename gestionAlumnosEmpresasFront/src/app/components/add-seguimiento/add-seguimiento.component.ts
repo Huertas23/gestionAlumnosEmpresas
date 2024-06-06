@@ -18,71 +18,31 @@ export class AddSeguimientoComponent implements OnInit {
     fecha_seguimiento: undefined,
     informe_final: '',
   };
-  alumno?: Alumno;
-  empresa?: Empresa;
-  alumnos:any;
-  
-  constructor(private router: Router, private httpService: HttpService) {}
+  alumno?: any;
+  empresa?: any;
+  alumnos: any;
 
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private httpService: HttpService,
+    private route: ActivatedRoute
+  ) {}
+
+  async ngOnInit(): Promise<void> {
     // Aquí cargarías los alumnos y empresas mediante una llamada a la API
     const empresasList = await this.getAlumnos();
     empresasList.forEach((element: Alumno) => {
       this.alumnos.push(element);
     });
-    const alumnos: Alumno[] = [
-      {
-        id: 1,
-        nombre: 'Juan',
-        apellido: 'Perez',
-        dni: '12345678A',
-        centroPracticas: 'Tech Solutions',
-        empresa_id: 1,
-        tutorCentroId: 1,
-      },
-      {
-        id: 2,
-        nombre: 'Ana',
-        apellido: 'Gomez',
-        dni: '87654321B',
-        centroPracticas: 'Innovative Startups',
-        empresa_id: 2,
-        tutorCentroId: 2,
-      },
-    ];
-    const empresas: Empresa[] = [
-      {
-        id: 1,
-        razonSocial: 'Tech Solutions',
-        domicilioSocial: 'Calle Falsa 123',
-        cif: 'A12345678',
-        fechaFirma: new Date(),
-        direccionPracticas: 'Calle Practicas 123',
-        tutorLaboral: 'Carlos López',
-        dniTutorLaboral: '12345678A',
-        representanteLegal: 'Ana García',
-        dniRepresentante: '87654321B',
-      },
-      {
-        id: 2,
-        razonSocial: 'Innovative Startups',
-        domicilioSocial: 'Avenida Siempre Viva 742',
-        cif: 'B87654321',
-        fechaFirma: new Date(),
-        direccionPracticas: 'Avenida Practicas 742',
-        tutorLaboral: 'María Sánchez',
-        dniTutorLaboral: '87654321B',
-        representanteLegal: 'Luis Pérez',
-        dniRepresentante: '12345678A',
-      },
-    ];
 
-    this.router.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe((params) => {
       const alumnoId = params['alumnoId'];
       if (alumnoId) {
-        this.alumno = alumnos.find((a) => a.id === +alumnoId);
+        this.alumno = this.alumnos.find((a) => a.id === +alumnoId);
         if (this.alumno) {
-          this.empresa = empresas.find((e) => e.id === this.alumno!.empresa_id);
+          this.empresa = this.alumno.empresas.find(
+            (e) => e.id === this.alumno!.empresa_id
+          );
           this.seguimiento.alumno_id = this.alumno.id;
           this.seguimiento.tutor_id = this.empresa?.tutorLaboral
             ? this.getTutorIdByNombre(this.empresa.tutorLaboral)
@@ -91,19 +51,14 @@ export class AddSeguimientoComponent implements OnInit {
       }
     });
   }
-  }
-
-
-
 
   async getAlumnos() {
     const alumnos = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.alumnos
     );
     console.log(alumnos);
-    return alumnos
+    return alumnos;
   }
-
 
   getEmpresaNombre(alumno: any | undefined): string {
     if (alumno === undefined) {
