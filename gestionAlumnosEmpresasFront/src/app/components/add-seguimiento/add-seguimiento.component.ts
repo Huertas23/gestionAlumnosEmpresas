@@ -22,7 +22,7 @@ export class AddSeguimientoComponent implements OnInit {
   empresa?: any = [];
   alumnos: any = [];
   alumnoId: any;
-  tutoresLaborales : any = [];
+  tutoresLaborales: any = [];
 
   constructor(
     private router: Router,
@@ -44,15 +44,14 @@ export class AddSeguimientoComponent implements OnInit {
     if (this.alumnoId) {
       this.alumno = this.alumnos.find((a: any) => {
         console.log(a.id == this.alumnoId);
-        if(a.id == this.alumnoId){
+        if (a.id == this.alumnoId) {
           return a;
         }
-        
       });
       if (this.alumno) {
         this.empresa = this.alumno.empresa;
         this.seguimiento.alumno_id = this.alumno.id;
-        this.seguimiento.tutor_id = this.empresa?.tutorLaboral
+        this.seguimiento.tutor_id = this.empresa?.tutorLaboral;
       }
     }
   }
@@ -88,22 +87,21 @@ export class AddSeguimientoComponent implements OnInit {
 
   async onSubmit() {
     // Aquí añadirías la lógica para guardar el seguimiento, por ejemplo, llamar a un servicio de API
-    const formData = new FormData();
-    formData.append('alumno_id', this.alumnoId);
-    formData.append('tutor_id', this.alumno.tutor);
-    const fecha = this.seguimiento.fecha_seguimiento?.toString().length >0 ? this.seguimiento.fecha_seguimiento?.toString():'';
-    formData.append(
-      'fecha_seguimiento', fecha);
-      
-    formData.append('informe_final', this.seguimiento.informe_final);
-    if (this.seguimiento.archivo_pdf) {
-      formData.append('archivo_pdf', this.seguimiento.archivo_pdf);
-    }
+
+    const fecha = this.seguimiento.fecha_seguimiento?.toString();
+    const body = {
+      alumno_id: this.alumnoId,
+      tutor_id: this.alumno.tutor,
+      fecha_seguimiento: fecha,
+      informe_final: this.seguimiento.informe_final,
+      archivo_pdf: this.seguimiento.archivo_pdf,
+    };
 
     // Aquí deberías enviar formData a tu servicio de API
-    console.log('Nuevo seguimiento:', formData);
+    console.log('Nuevo seguimiento:', body);
     const alumnos = await this.httpService.post(
-      CONSTANTES.apiUrl + CONSTANTES.seguimientos, formData
+      CONSTANTES.apiUrl + CONSTANTES.seguimientos,
+      body
     );
 
     // Después de guardar, redirigir a otra página si es necesario
