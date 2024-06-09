@@ -14,7 +14,7 @@ export class EmpresasListComponent implements OnInit {
   constructor(private httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
-    // Aquí podrías cargar las empresas mediante una llamada a la API
+    // Cargar empresas
     const empresasList = await this.getEmpresas();
     empresasList.forEach((element: Empresa) => {
       this.empresas.push(element);
@@ -22,6 +22,7 @@ export class EmpresasListComponent implements OnInit {
   }
 
   async getEmpresas() {
+    //Obtener empresas
     const empresas = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.empresas
     );

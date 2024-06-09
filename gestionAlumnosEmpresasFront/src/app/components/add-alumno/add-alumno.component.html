@@ -3,21 +3,16 @@
   <form (ngSubmit)="onSubmit()">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" [(ngModel)]="alumno.nombre" required>
-
     <label for="apellido">Apellido:</label>
     <input type="text" id="apellido" name="apellido" [(ngModel)]="alumno.apellido" required>
-
     <label for="dni">DNI:</label>
     <input type="text" id="dni" name="dni" [(ngModel)]="alumno.dni">
-
     <label for="empresa_id">Centro de Prácticas:</label>
     <select id="empresa_id" name="empresa_id" [(ngModel)]="alumno.empresa_id" (change)="onEmpresaChange($event)">
       <option *ngFor="let empresa of empresas" [value]="empresa.id">{{ empresa.razonSocial }}</option>
     </select>
-
     <label for="centroPracticas">Razón Social:</label>
     <input type="text" id="centroPracticas" name="centroPracticas" [(ngModel)]="alumno.centroPracticas" disabled>
-
     <label for="tutorCentroId">Tutor del Centro:</label>
     <select id="tutorCentroId" name="tutorCentroId" [(ngModel)]="alumno.tutorCentroId">
       <option *ngFor="let tutor of tutoresCentro" [value]="tutor.id">{{ tutor.nombre }}</option>

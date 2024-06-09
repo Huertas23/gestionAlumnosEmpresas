@@ -43,7 +43,7 @@ export class AddSeguimientoComponent implements OnInit {
 
     if (this.alumnoId) {
       this.alumno = this.alumnos.find((a: any) => {
-        console.log(a.id == this.alumnoId);
+        //console.log(a.id == this.alumnoId);
         if (a.id == this.alumnoId) {
           return a;
         }
@@ -57,6 +57,7 @@ export class AddSeguimientoComponent implements OnInit {
   }
 
   async getAlumnos() {
+    // Cargar los alumnos 
     const alumnos = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.alumnos
     );
@@ -64,6 +65,7 @@ export class AddSeguimientoComponent implements OnInit {
     return alumnos;
   }
 
+  // Obtenemos nombre de la empresa y el tutor laboral que tiene asignado el alumno, buscados por id
   getEmpresaNombre(alumno: any | undefined): string {
     if (alumno === undefined) {
       return 'No asignada';
@@ -86,8 +88,6 @@ export class AddSeguimientoComponent implements OnInit {
   }
 
   async onSubmit() {
-    // Aquí añadirías la lógica para guardar el seguimiento, por ejemplo, llamar a un servicio de API
-
     const fecha = this.seguimiento.fecha_seguimiento?.toString();
     const body = {
       alumno_id: this.alumnoId,
@@ -97,14 +97,12 @@ export class AddSeguimientoComponent implements OnInit {
       archivo_pdf: this.seguimiento.archivo_pdf,
     };
 
-    // Aquí deberías enviar formData a tu servicio de API
-    console.log('Nuevo seguimiento:', body);
+    // Guardar seguimiento
+    //console.log('Nuevo seguimiento:', body);
     const alumnos = await this.httpService.post(
       CONSTANTES.apiUrl + CONSTANTES.seguimientos,
       body
     );
-
-    // Después de guardar, redirigir a otra página si es necesario
     this.router.navigate(['/seguimientos']);
   }
 }

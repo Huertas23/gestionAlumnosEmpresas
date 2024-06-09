@@ -28,10 +28,10 @@ export class AddAlumnoComponent implements OnInit {
   constructor(private router: Router, private httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
-    // Cargar las empresas desde la API
+    //Cargar las empresas desde la API
     this.empresas = await this.getEmpresas();
 
-    // Cargar los tutores del centro
+    //Cargar los tutores del centro
     this.tutoresCentro = await this.getTutores();
   }
 
@@ -46,6 +46,7 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   async getEmpresas() {
+    //Cargar las empresas
     const empresas = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.empresas
     );
@@ -53,6 +54,7 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   async getTutores() {
+    //cargar los tutores
     const tutores = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.tutores
     );
@@ -60,6 +62,7 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   onEmpresaChange(event: any) {
+    // Seleccionar la empresa para el alumno
     const empresaId = event.target.value;
     if (empresaId !== undefined) {
       this.selectedEmpresa = this.empresas.find((empresa) => empresa.id == empresaId);

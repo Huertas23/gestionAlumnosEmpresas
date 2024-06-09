@@ -25,7 +25,7 @@ export class AddEmpresaComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   onSubmit() {
-    // Lógica para guardar la empresa
+    // Guardar la empresa
     this.httpService.post(
       CONSTANTES.apiUrl + CONSTANTES.empresas,
       this.empresa

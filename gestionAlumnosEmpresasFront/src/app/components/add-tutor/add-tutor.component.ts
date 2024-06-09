@@ -19,7 +19,7 @@ export class AddTutorComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   onSubmit() {
-    // Lógica para guardar el tutor
+    // Guardar el tutor
     console.log('Nuevo tutor:', this.tutor);
     this.httpService.post(
       CONSTANTES.apiUrl + CONSTANTES.tutores,

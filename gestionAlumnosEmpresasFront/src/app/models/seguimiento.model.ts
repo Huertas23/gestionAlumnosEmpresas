@@ -4,5 +4,5 @@ export interface Seguimiento {
   tutor_id: number | undefined;
   fecha_seguimiento: Date | undefined;
   informe_final: string;
-  archivo_pdf?: File; 
+  archivo_pdf?: File; //Duda sobre si  cargaremos asi o con ruta(string)
 }

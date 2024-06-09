@@ -4,8 +4,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    margin: 50px auto; /* Ajustar márgenes */
-    margin-bottom: 100px; /* Añadir margen inferior */
+    margin: 50px auto; 
+    margin-bottom: 100px; 
   }
   
   .form-container form {
@@ -37,7 +37,7 @@
     align-self: center;
     transition: background-color 0.3s;
     font-size: 16px;
-    margin-top: 20px; /* Añadir margen superior */
+    margin-top: 20px; 
   }
   
   .form-container button:hover {

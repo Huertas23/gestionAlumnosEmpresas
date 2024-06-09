@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
-    // Aquí podrías cargar los alumnos y empresas mediante una llamada a la API
+    // Cargamos los alumnos
     const empresasList = await this.getAlumnos();
     empresasList.forEach((element: Alumno) => {
       this.alumnos.push(element);
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
 
 
   async getAlumnos() {
+    // Obetener alumnos
     const alumnos = await this.httpService.get(
       CONSTANTES.apiUrl + CONSTANTES.alumnos
     );
