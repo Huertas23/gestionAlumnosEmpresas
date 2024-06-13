@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -12,8 +12,6 @@ import { AddEmpresaComponent } from './components/add-empresa/add-empresa.compon
 import { AddTutorComponent } from './components/add-tutor/add-tutor.component';
 import { AddSeguimientoComponent } from './components/add-seguimiento/add-seguimiento.component';
 import { TutoresListComponent } from './components/tutores-list/tutores-list.component';
-import { HttpService } from './services/httpService';
-import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SeguimientosListComponent } from './components/seguimientos-list/seguimientos-list.component';
 
@@ -34,7 +32,7 @@ import { SeguimientosListComponent } from './components/seguimientos-list/seguim
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, // Añadir FormsModule aquí
+    FormsModule,
     HttpClientModule,
   ],
   providers: [],

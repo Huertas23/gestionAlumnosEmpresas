@@ -11,7 +11,6 @@ import { LoginComponent } from './components/login/login.component';
 import { AddSeguimientoComponent } from './components/add-seguimiento/add-seguimiento.component';
 import { SeguimientosListComponent } from './components/seguimientos-list/seguimientos-list.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },

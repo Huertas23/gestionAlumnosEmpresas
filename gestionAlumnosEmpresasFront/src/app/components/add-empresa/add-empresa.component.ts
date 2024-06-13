@@ -25,11 +25,66 @@ export class AddEmpresaComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   onSubmit() {
+    if (!this.validateDni(this.empresa.dniTutorLaboral)) {
+      alert('DNI tutor no válido');
+      return;
+    }
+    if (!this.validateDni(this.empresa.dniRepresentante)) {
+      alert('DNI representante no válido');
+      return;
+    }
+
+    if (!this.validateCif(this.empresa.cif)) {
+      alert('CIF no válido');
+      return;
+    }
     // Guardar la empresa
     this.httpService.post(
       CONSTANTES.apiUrl + CONSTANTES.empresas,
       this.empresa
     );
     this.router.navigate(['/empresas']);
+  }
+  validateDni(dni: string): boolean {
+    const patronDni = /^[XYZ]?\d{5,8}[A-Z]$/;
+    if (!patronDni.test(dni)) return false;
+
+    const dniLetras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    let number = dni.substring(0, dni.length - 1).toUpperCase();
+    number = number.replace('X', '0').replace('Y', '1').replace('Z', '2');
+
+    const numero = parseInt(number, 10);
+    const letra = dni[dni.length - 1].toUpperCase();
+    return dniLetras[numero % 23] === letra;
+  }
+
+  validateCif(cif: string): boolean {
+    const cifPattern = /^[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]$/;
+    if (!cifPattern.test(cif)) return false;
+
+    const control = cif[cif.length - 1];
+    const digits = cif.slice(1, -1);
+    const letters = 'JABCDEFGHI';
+    let sum = 0;
+
+    for (let i = 0; i < digits.length; i++) {
+      let n = parseInt(digits[i], 10);
+      if (i % 2 === 0) {
+        n *= 2;
+        if (n > 9) n -= 9;
+      }
+      sum += n;
+    }
+
+    const controlDigit = (10 - (sum % 10)) % 10;
+    const controlLetter = letters[controlDigit];
+
+    if (/[ABEH]/.test(cif[0])) {
+      return control === controlDigit.toString();
+    }
+    if (/[KPQS]/.test(cif[0])) {
+      return control === controlLetter;
+    }
+    return control === controlDigit.toString() || control === controlLetter;
   }
 }

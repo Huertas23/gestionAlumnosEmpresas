@@ -36,6 +36,10 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   async onSubmit() {
+      if (!this.validateDni(this.alumno.dni)) {
+        alert('DNI no válido');
+        return;
+      }
     // Guardar el alumno
     console.log('Nuevo alumno:', this.alumno);
     await this.httpService.post(
@@ -60,6 +64,21 @@ export class AddAlumnoComponent implements OnInit {
     );
     return tutores;
   }
+
+  validateDni(dni: string): boolean {
+    const patronDni = /^[XYZ]?\d{5,8}[A-Z]$/;
+    if (!patronDni.test(dni)) return false;
+
+    const dniLetras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    let number = dni.substring(0, dni.length - 1).toUpperCase();
+    number = number.replace('X', '0').replace('Y', '1').replace('Z', '2');
+
+    const numero = parseInt(number, 10);
+    const letra = dni[dni.length - 1].toUpperCase();
+    return dniLetras[numero % 23] === letra;
+  }
+
+  
 
   onEmpresaChange(event: any) {
     // Seleccionar la empresa para el alumno

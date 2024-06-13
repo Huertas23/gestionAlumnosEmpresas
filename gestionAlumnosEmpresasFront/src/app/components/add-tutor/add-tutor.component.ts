@@ -19,6 +19,10 @@ export class AddTutorComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   onSubmit() {
+    if (!this.validateDni(this.tutor.dniResponsable)) {
+      alert('DNI tutor no válido');
+      return;
+    }
     // Guardar el tutor
     console.log('Nuevo tutor:', this.tutor);
     this.httpService.post(
@@ -27,4 +31,18 @@ export class AddTutorComponent {
     );
     this.router.navigate(['/tutores']);
   }
+
+  validateDni(dni: string): boolean {
+    const patronDni = /^[XYZ]?\d{5,8}[A-Z]$/;
+    if (!patronDni.test(dni)) return false;
+
+    const dniLetras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    let number = dni.substring(0, dni.length - 1).toUpperCase();
+    number = number.replace('X', '0').replace('Y', '1').replace('Z', '2');
+
+    const numero = parseInt(number, 10);
+    const letra = dni[dni.length - 1].toUpperCase();
+    return dniLetras[numero % 23] === letra;
+  }
+
 }
