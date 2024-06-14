@@ -8,7 +8,7 @@
     <label for="tutor">Tutor Laboral:</label>
     <div>{{ empresa?.tutorLaboral }}</div>
     <label for="fecha_seguimiento">Fecha de Seguimiento:</label>
-    <input type="date" id="fecha_seguimiento" [(ngModel)]="seguimiento.fecha_seguimiento" name="fecha_seguimiento" required readonly>
+    <input type="date" id="fecha_seguimiento" [(ngModel)]="seguimiento.fecha_seguimiento" name="fecha_seguimiento" required>
     <label for="informe_final">Informe Final:</label>
     <textarea id="informe_final" [(ngModel)]="seguimiento.informe_final" name="informe_final" rows="4" required></textarea>
     <label for="archivo_pdf">Adjuntar PDF:</label>

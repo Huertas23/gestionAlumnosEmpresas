@@ -25,6 +25,12 @@ export class AddEmpresaComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   async onSubmit() {
+
+    if (!this.validateForm()) {
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
+    
     if (!this.validateDni(this.empresa.dniTutorLaboral)) {
       alert('DNI tutor no válido');
       return;
@@ -44,6 +50,20 @@ export class AddEmpresaComponent {
       this.empresa
     );
     this.router.navigate(['/empresas']);
+  }
+
+  validateForm(): boolean {
+    return (
+      this.empresa.razonSocial !== '' &&
+      this.empresa.domicilioSocial !== '' &&
+      this.empresa.cif !== '' &&
+      this.empresa.fechaFirma !== undefined &&
+      this.empresa.direccionPracticas !== '' &&
+      this.empresa.tutorLaboral !== '' &&
+      this.empresa.dniTutorLaboral !== '' &&
+      this.empresa.representanteLegal !== '' &&
+      this.empresa.dniRepresentante !== ''
+    );
   }
   validateDni(dni: string): boolean {
     const patronDni = /^[XYZ]?\d{5,8}[A-Z]$/;

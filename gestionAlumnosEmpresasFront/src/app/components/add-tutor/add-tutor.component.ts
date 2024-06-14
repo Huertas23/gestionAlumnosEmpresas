@@ -19,6 +19,10 @@ export class AddTutorComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   onSubmit() {
+    if (!this.validateForm()) {
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
     if (!this.validateDni(this.tutor.dniResponsable)) {
       alert('DNI tutor no válido');
       return;
@@ -30,6 +34,14 @@ export class AddTutorComponent {
       this.tutor
     );
     this.router.navigate(['/tutores']);
+  }
+
+  validateForm(): boolean {
+    return (
+      this.tutor.curso !== '' &&
+      this.tutor.nombre !== '' &&
+      this.tutor.dniResponsable !== ''
+    );
   }
 
   validateDni(dni: string): boolean {

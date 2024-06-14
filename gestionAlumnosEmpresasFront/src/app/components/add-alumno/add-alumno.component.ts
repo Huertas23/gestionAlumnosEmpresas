@@ -36,6 +36,10 @@ export class AddAlumnoComponent implements OnInit {
   }
 
   async onSubmit() {
+    if (!this.validateForm()) {
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
       if (!this.validateDni(this.alumno.dni)) {
         alert('DNI no válido');
         return;
@@ -63,6 +67,17 @@ export class AddAlumnoComponent implements OnInit {
       CONSTANTES.apiUrl + CONSTANTES.tutores
     );
     return tutores;
+  }
+
+  validateForm(): boolean {
+    return (
+      this.alumno.nombre !== '' &&
+      this.alumno.apellido !== '' &&
+      this.alumno.dni !== '' &&
+      this.alumno.centroPracticas !== '' &&
+      this.alumno.empresa_id !== undefined &&
+      this.alumno.tutorCentroId !== undefined
+    );
   }
 
   validateDni(dni: string): boolean {
