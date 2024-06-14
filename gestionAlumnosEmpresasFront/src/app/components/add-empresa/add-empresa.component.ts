@@ -24,7 +24,7 @@ export class AddEmpresaComponent {
 
   constructor(private router: Router, private httpService: HttpService) {}
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.validateDni(this.empresa.dniTutorLaboral)) {
       alert('DNI tutor no válido');
       return;
@@ -59,12 +59,12 @@ export class AddEmpresaComponent {
   }
 
   validateCif(cif: string): boolean {
-    const cifPattern = /^[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]$/;
-    if (!cifPattern.test(cif)) return false;
+    const patronCif = /^[ABCDEFGHJKLMNPQRSUVW]\d{7}[0-9A-J]$/;
+    if (!patronCif.test(cif)) return false;
 
     const control = cif[cif.length - 1];
     const digits = cif.slice(1, -1);
-    const letters = 'JABCDEFGHI';
+    const letras = 'JABCDEFGHI';
     let sum = 0;
 
     for (let i = 0; i < digits.length; i++) {
@@ -76,15 +76,15 @@ export class AddEmpresaComponent {
       sum += n;
     }
 
-    const controlDigit = (10 - (sum % 10)) % 10;
-    const controlLetter = letters[controlDigit];
+    const digitoControl = (10 - (sum % 10)) % 10;
+    const letra = letras[digitoControl];
 
     if (/[ABEH]/.test(cif[0])) {
-      return control === controlDigit.toString();
+      return control === digitoControl.toString();
     }
     if (/[KPQS]/.test(cif[0])) {
-      return control === controlLetter;
+      return control === letra;
     }
-    return control === controlDigit.toString() || control === controlLetter;
+    return control === digitoControl.toString() || control === letra;
   }
 }
